@@ -66,19 +66,19 @@ And make the changes you need.
 Next, install the dependencies.
 
 ```bash
-npm install
+pnpm install
 ```
 
 Then, build the bots
 
 ```bash
-npm run build:bots
+pnpm run build:bots
 ```
 
 Then, run the app
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 This app should run on `http://localhost:3000/`

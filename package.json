@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "npm run build:bots && tsc && vite build",
-    "build:bots": "npm run clean && tsc --project tsconfig-bots.json && node --no-warnings esbuild-script.mjs && tsx src/scripts/deploy-bots.ts",
+    "build": "pnpm run build:bots && tsc && vite build",
+    "build:bots": "pnpm run clean && tsc --project tsconfig-bots.json && node --no-warnings esbuild-script.mjs && tsx src/scripts/deploy-bots.ts",
     "clean": "rimraf dist",
     "dev": "vite",
     "lint": "eslint src/",
@@ -17,7 +17,7 @@
   "prettier": {
     "printWidth": 120,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "all"
   },
   "devDependencies": {
     "@mantine/core": "8.3.6",
@@ -50,7 +50,7 @@
     "vite": "7.1.12",
     "vitest": "4.0.6"
   },
-  "packageManager": "npm@10.9.4",
+  "packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc",
   "engines": {
     "node": "^22.18.0 || >=24.2.0"
   }
