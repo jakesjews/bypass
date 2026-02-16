@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "backend": "docker compose up",
     "build": "pnpm run build:bots && tsc && vite build",
     "build:bots": "pnpm run clean && tsc --project tsconfig-bots.json && node --no-warnings esbuild-script.mjs && tsx src/scripts/deploy-bots.ts",
     "clean": "rimraf dist",
