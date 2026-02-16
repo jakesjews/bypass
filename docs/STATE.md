@@ -21,9 +21,9 @@
 ## Environments
 
 ### Local
-- Medplum backend (docker): ✅ / ❌
+- Medplum stack (docker compose): ✅ / ❌
 - Medplum API: http://localhost:8103
-- Medplum admin UI (optional): http://localhost:3005
+- Medplum admin UI: http://localhost:3005 (or 3000 depending on your docker-compose.yml)
 - Product app: http://localhost:3000 (chart demo default) or http://localhost:5173 (your dev port)
 - Notes: …
 

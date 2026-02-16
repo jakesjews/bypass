@@ -1,11 +1,9 @@
-# Starter app: Medplum Chart Demo (our baseline, not Hello World)
+# Starter app: Medplum Chart Demo (our baseline)
 
 We are basing our **product UI** on `medplum-chart-demo`, because it already demonstrates:
 - encounter lifecycle + notes,
 - a 3-panel chart UI,
 - and a **bots-based “note → structured data”** pattern we can adapt for “note → draft orders”.
-
-Hello World is still useful as a **component cookbook**, but it’s not the closest match to our workflow.
 
 ---
 
@@ -27,12 +25,12 @@ What we will change:
 
 ## Quick start (local)
 
-### 1) Run your local Medplum backend (recommended backend-only)
+### 1) Run your local Medplum backend (single root compose)
+
+We run the full local Medplum stack via `docker-compose.yml` at repo root:
 
 ```bash
-docker compose -f docker/medplum-backend.yml up -d
-# optional admin UI:
-docker compose -f docker/medplum-admin.yml up -d
+docker compose up -d
 ```
 
 Smoke test:
@@ -129,7 +127,6 @@ Then, iterate:
 - [ ] You can create an Encounter + ClinicalImpression note
 - [ ] You can trigger a bot and see structured output
 - [ ] You can ship a weekly demo from this baseline
-
 
 ---
 

@@ -39,6 +39,15 @@ High-control mode:
 codex --sandbox workspace-write --ask-for-approval untrusted
 ```
 
+## Local backend quick start
+
+```bash
+docker compose up -d
+```
+
+- Medplum API: http://localhost:8103
+- Medplum admin UI: http://localhost:3005 (if you map it)
+
 ## Where to start reading
 
 - `docs/INDEX.md`

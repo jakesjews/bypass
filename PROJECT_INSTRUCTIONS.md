@@ -18,12 +18,10 @@ STACK (LOCKED)
 
 STARTER APP (LOCKED)
 - Baseline UI/template: **Medplum Chart Demo** patterns (`docs/STARTER_APP.md`).
-  - Hello World is optional reference only (component cookbook).
 
 CHATGPT PROJECT HYGIENE
 - Upload only the curated doc set described in `docs/CHATGPT_PROJECT.md` to avoid split brain.
 - If you update a doc, the change must be committed to git first.
-
 
 OPERATING RHYTHM (HOW WE SHIP)
 Start every work session by reading:

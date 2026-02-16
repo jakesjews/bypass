@@ -1,15 +1,13 @@
-# Local Medplum backend (no Medplum App)
+# Local Medplum full stack (dev)
 #
-# Why this exists:
-# - The official full-stack compose includes the Medplum App UI.
-# - For a custom product app, it’s less confusing to run only the backend.
+# This is based on Medplum's official full-stack Docker Compose file:
+# https://www.medplum.com/docs/self-hosting/running-full-medplum-stack-in-docker
 #
-# Bring it up:
-#   docker compose -f docker/medplum-backend.yml up -d
+# We keep it at repo root for simplicity.
 #
-# Add admin UI:
-#   docker compose -f docker/medplum-backend.yml -f docker/medplum-admin.yml up -d
-
+# Note on ports:
+# - We map Medplum App (admin UI) to 3005 to avoid colliding with medplum-chart-demo (often 3000).
+#
 services:
   postgres:
     image: postgres:16
@@ -59,18 +57,13 @@ services:
         condition: service_healthy
     ports:
       - '8103:8103'
-
-    # Matches Medplum's upstream compose pattern (server config from env vars)
     command: ['env']
-
     environment:
       MEDPLUM_PORT: 8103
       MEDPLUM_BASE_URL: 'http://localhost:8103/'
-
-      # Set this to your product app dev server.
-      # If you're using Vite, it's often http://localhost:5173
-      MEDPLUM_APP_BASE_URL: 'http://localhost:5173/'
-
+      # IMPORTANT: This is the Medplum App (admin UI) base URL.
+      # Your product app is separate (chart-demo baseline).
+      MEDPLUM_APP_BASE_URL: 'http://localhost:3005/'
       MEDPLUM_STORAGE_BASE_URL: 'http://localhost:8103/storage/'
 
       MEDPLUM_DATABASE_HOST: 'postgres'
@@ -85,9 +78,8 @@ services:
 
       MEDPLUM_BINARY_STORAGE: 'file:./binary/'
 
-      # Local-only convenience.
-      # Tighten this to your exact dev origins once your ports stabilize.
-      MEDPLUM_ALLOWED_ORIGINS: 'http://localhost:5173,http://localhost:3000,http://localhost:3005'
+      # Local-only convenience. Tighten later.
+      MEDPLUM_ALLOWED_ORIGINS: 'http://localhost:3000,http://localhost:3005,http://localhost:5173'
 
       MEDPLUM_INTROSPECTION_ENABLED: 'true'
       MEDPLUM_VM_CONTEXT_BOTS_ENABLED: 'true'
@@ -113,7 +105,7 @@ services:
       medplum-server:
         condition: service_healthy
     ports:
-      - '3005:3000'  # avoid collision with chart-demo dev server (defaults to 3000)
+      - '3005:3000'
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:3000']
       interval: 10s

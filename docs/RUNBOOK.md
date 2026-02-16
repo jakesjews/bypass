@@ -10,37 +10,54 @@ When something disagrees, trust the official docs.
 
 - **Medplum Server** = your backend (FHIR API, auth endpoints, storage)
 - **Medplum App** = Medplum’s stock UI (admin/debug tool)
-- **Your Product App** = your custom React UI using Medplum React components
+- **Your Product App** = your custom React UI (based on `medplum-chart-demo`) using Medplum React components
 
-The common beginner trap is running the Medplum App and thinking you’re “running your app”.
+The common trap is running the Medplum App and thinking you’re “running your app”.
 You’re not — it’s just the admin UI.
 
-### Start the Medplum backend
+### Start the local Medplum stack
 
-Recommended (backend-only):
+We now keep **one** `docker-compose.yml` at repo root for all backend services (Postgres + Redis + Medplum Server + Medplum App).
 
-```bash
-docker compose -f docker/medplum-backend.yml up -d
-```
+Medplum publishes an official full-stack compose file that you can run with `docker compose up -d`, and it includes exactly those four containers. Use that upstream file as your baseline, then customize ports/origins as needed for your product. 
 
-Smoke test:
-- [ ] `GET http://localhost:8103/fhir/R4/metadata` returns a CapabilityStatement
-
-### Optional: start the Medplum App (admin/debug)
+Start:
 
 ```bash
-docker compose -f docker/medplum-backend.yml -f docker/medplum-admin.yml up -d
+docker compose up -d
 ```
 
-Smoke test:
-- [ ] http://localhost:3005 loads (we use 3005 to avoid colliding with chart demo dev server on 3000)
-- [ ] You can create/read a Patient via UI or API
+Smoke tests:
+
+- [ ] `GET http://localhost:8103/fhir/R4/metadata` returns a CapabilityStatement (FHIR server is up)
+- [ ] Medplum healthcheck returns `{ ok: true, ... }`:
+  - `GET http://localhost:8103/healthcheck`
+
+### Medplum admin UI and your product dev server port collision
+
+The upstream Medplum compose runs the Medplum App at `http://localhost:3000` by default.
+
+`medplum-chart-demo` also commonly runs at `http://localhost:3000`.
+
+You need **one** of these simple fixes:
+
+**Option A (recommended): keep your product app on 3000, move Medplum App**
+- Map Medplum App to `3005:3000` in `docker-compose.yml`
+- Then:
+  - Product app: `http://localhost:3000`
+  - Medplum App: `http://localhost:3005`
+
+**Option B: keep Medplum App on 3000, run your product app on another port**
+- Configure Vite dev server port (e.g., 3001) for your product app
+
+Whichever you choose, ensure `MEDPLUM_ALLOWED_ORIGINS` includes both dev origins.
 
 ### Product app local dev
 
 - Set `MEDPLUM_BASE_URL=http://localhost:8103`
 - Set `MEDPLUM_CLIENT_ID=<local ClientApplication id>`
-- Run your React dev server (Vite/Next/etc)
+- Run your React dev server (chart demo defaults to 3000)
+- Auth: Outseta embed → Medplum token exchange (see `docs/AUTH_OUTSETA_MEDPLUM.md`)
 
 ### Demo template reality check (Chart Demo is the baseline)
 
@@ -50,11 +67,6 @@ Key trap: like many Medplum demos, it defaults to the **hosted** backend (`https
 If you start from it, you must point it at your **self-hosted** Medplum Server.
 
 See: `docs/STARTER_APP.md`
-
-(Hello World is still useful as a component cookbook; see `docs/HELLO_WORLD_CONVERSION.md`.)
-
----
-
 
 ## AWS (self-host Medplum using CDK)
 
@@ -156,6 +168,6 @@ Avoid `allowedOrigins: '*'` except for short-lived local debugging.
 
 ## Server configuration locations
 
-- Local docker: configured via environment variables in `docker/medplum-backend.yml`
+- Local docker: configured via environment variables in `docker-compose.yml`
 - Local non-docker: `medplum.config.json` (default)
 - AWS: loads config from AWS SSM Parameter Store using `/medplum/<env>/...` keys

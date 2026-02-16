@@ -6,9 +6,9 @@ This is intentionally boring. Boring plans ship.
 **Goal:** A repeatable local environment for fast iteration.
 
 **Done means**
-- `docker compose -f docker/medplum-backend.yml up -d` starts Medplum backend locally
+- `docker compose up -d` starts the local Medplum stack
 - You can hit the local FHIR endpoint and create a test resource
-- Optional: you can bring up Medplum admin UI (`docker/medplum-admin.yml`) to create Projects/ClientApplications
+- Medplum admin UI comes up with the stack (port depends on your compose; often 3000 or 3005)
 - Chart demo starter app runs against local backend (`docs/STARTER_APP.md`)
 
 ## Phase 1 — AWS staging Medplum

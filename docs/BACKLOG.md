@@ -6,7 +6,7 @@ Status values: `todo | doing | blocked | done`
 
 | ID | Pri | Status | Title | Acceptance criteria (Definition of Done) | Notes |
 |---:|:---:|:------:|-------|------------------------------------------|------|
-| INF-001 | P0 | todo | Local Medplum backend running (docker) | `docker compose -f docker/medplum-backend.yml up -d` brings up API; `/fhir/R4/metadata` works | Admin UI optional via `docker/medplum-admin.yml` |
+| INF-001 | P0 | todo | Local Medplum stack running (docker compose) | `docker compose up -d` brings up API; `/fhir/R4/metadata` works | Includes Medplum App (admin UI) by default |
 | CHART-001 | P0 | todo | Adopt Medplum Chart Demo as starter app | Chart demo runs locally (React dev server), builds bots successfully | See `docs/STARTER_APP.md` |
 | CHART-002 | P0 | todo | Chart demo points at self-hosted backend | App runs with `MEDPLUM_BASE_URL` pointing to local/self-host; **no calls** to `https://api.medplum.com` | `.env.defaults` → `.env`; set `MEDPLUM_CLIENT_ID` |
 | CHART-003 | P1 | todo | Upload chart demo core/example data | Core data uploaded once; optional example data uploaded; chart UI shows realistic data | Use Medplum App batch create tool |

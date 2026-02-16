@@ -82,8 +82,12 @@ Upload only the canonical docs:
 
 Avoid uploading older duplicated files — Projects remember files, and duplicates are how you get “split brain”.
 
-
 ## v3 note (template update)
 
-- `docs/STARTER_APP.md` is now the primary “starter template” doc (Medplum Chart Demo baseline).
+- `docs/STARTER_APP.md` is now the primary starter template doc (Medplum Chart Demo baseline).
 - `docs/CHATGPT_PROJECT.md` was added to keep Project uploads from drifting.
+
+## Docker compose note
+
+Earlier kits included `docker/medplum-backend.yml` and `docker/medplum-admin.yml`.
+We now standardize on a single `docker-compose.yml` at repo root for the full local stack.
