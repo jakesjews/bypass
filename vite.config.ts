@@ -1,10 +1,7 @@
 import react from '@vitejs/plugin-react';
-import dns from 'dns';
 import { copyFileSync, existsSync } from 'fs';
 import path from 'path';
 import { defineConfig } from 'vite';
-
-dns.setDefaultResultOrder('verbatim');
 
 if (!existsSync(path.join(__dirname, '.env'))) {
   copyFileSync(path.join(__dirname, '.env.defaults'), path.join(__dirname, '.env'));
