@@ -23,6 +23,7 @@
     "@mantine/core": "8.3.15",
     "@mantine/hooks": "8.3.15",
     "@mantine/notifications": "8.3.15",
+    "@mantine/spotlight": "^8.3.15",
     "@medplum/bot-layer": "5.0.14",
     "@medplum/core": "5.0.14",
     "@medplum/definitions": "5.0.14",

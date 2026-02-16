@@ -17,6 +17,9 @@ importers:
       '@mantine/notifications':
         specifier: 8.3.15
         version: 8.3.15(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@mantine/spotlight':
+        specifier: ^8.3.15
+        version: 8.3.15(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@medplum/bot-layer':
         specifier: 5.0.14
         version: 5.0.14(@medplum/ccda@5.0.14(pdfmake@0.2.23))(@medplum/core@5.0.14(pdfmake@0.2.23))(@medplum/definitions@5.0.14)(fast-xml-parser@5.3.6)(form-data@4.0.5)(jose@5.10.0)(jszip@3.10.1)(node-fetch@2.7.0)(pdfmake@0.2.23)(ssh2-sftp-client@12.0.1)(ssh2@1.17.0)(twilio@5.12.1)(undici@7.22.0)
@@ -37,7 +40,7 @@ importers:
         version: 5.0.14(pdfmake@0.2.23)
       '@medplum/react':
         specifier: 5.0.14
-        version: 5.0.14(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(@mantine/notifications@8.3.15(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@medplum/core@5.0.14(pdfmake@0.2.23))(@medplum/react-hooks@5.0.14(@medplum/core@5.0.14(pdfmake@0.2.23))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(rfc6902@5.1.2)
+        version: 5.0.14(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(@mantine/notifications@8.3.15(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/spotlight@8.3.15(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@medplum/core@5.0.14(pdfmake@0.2.23))(@medplum/react-hooks@5.0.14(@medplum/core@5.0.14(pdfmake@0.2.23))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(rfc6902@5.1.2)
       '@tabler/icons-react':
         specifier: 3.36.1
         version: 3.36.1(react@19.2.4)
@@ -480,6 +483,14 @@ packages:
 
   '@mantine/notifications@8.3.15':
     resolution: {integrity: sha512-CJGSv8oeLWyJIVPninU7Ud6vV6/UJKWZJwRGBNg2K0Ak0U0coFN3gW3H6G1Mh2zllNxb3K4fpMJNz4Iy0sCBFw==}
+    peerDependencies:
+      '@mantine/core': 8.3.15
+      '@mantine/hooks': 8.3.15
+      react: ^18.x || ^19.x
+      react-dom: ^18.x || ^19.x
+
+  '@mantine/spotlight@8.3.15':
+    resolution: {integrity: sha512-zKssw/6eBmkY+1sGAgD8Vpy7dU5MXcY/cpvfr65SfIknRljKM9D4Z9TflzgIpxEdhvozls06MPcxj/pZkGpELQ==}
     peerDependencies:
       '@mantine/core': 8.3.15
       '@mantine/hooks': 8.3.15
@@ -3011,6 +3022,14 @@ snapshots:
       react-dom: 19.2.4(react@19.2.4)
       react-transition-group: 4.4.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
 
+  '@mantine/spotlight@8.3.15(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      '@mantine/core': 8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@mantine/hooks': 8.3.15(react@19.2.4)
+      '@mantine/store': 8.3.15(react@19.2.4)
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+
   '@mantine/store@8.3.15(react@19.2.4)':
     dependencies:
       react: 19.2.4
@@ -3085,7 +3104,7 @@ snapshots:
       '@medplum/core': 5.0.14(pdfmake@0.2.23)
       react: 19.2.4
 
-  '@medplum/react@5.0.14(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(@mantine/notifications@8.3.15(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@medplum/core@5.0.14(pdfmake@0.2.23))(@medplum/react-hooks@5.0.14(@medplum/core@5.0.14(pdfmake@0.2.23))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(rfc6902@5.1.2)':
+  '@medplum/react@5.0.14(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(@mantine/notifications@8.3.15(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/spotlight@8.3.15(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@medplum/core@5.0.14(pdfmake@0.2.23))(@medplum/react-hooks@5.0.14(@medplum/core@5.0.14(pdfmake@0.2.23))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(rfc6902@5.1.2)':
     dependencies:
       '@medplum/core': 5.0.14(pdfmake@0.2.23)
       '@medplum/react-hooks': 5.0.14(@medplum/core@5.0.14(pdfmake@0.2.23))(react@19.2.4)
@@ -3095,6 +3114,7 @@ snapshots:
       '@mantine/core': 8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@mantine/hooks': 8.3.15(react@19.2.4)
       '@mantine/notifications': 8.3.15(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@mantine/spotlight': 8.3.15(@mantine/core@8.3.15(@mantine/hooks@8.3.15(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@mantine/hooks@8.3.15(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       rfc6902: 5.1.2
 
   '@nodelib/fs.scandir@2.1.5':
