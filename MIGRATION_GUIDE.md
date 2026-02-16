@@ -86,5 +86,4 @@ Avoid uploading older duplicated files — Projects remember files, and duplicat
 ## v3 note (template update)
 
 - `docs/STARTER_APP.md` is now the primary “starter template” doc (Medplum Chart Demo baseline).
-- `docs/HELLO_WORLD_CONVERSION.md` is retained but marked **archived/optional**.
 - `docs/CHATGPT_PROJECT.md` was added to keep Project uploads from drifting.
