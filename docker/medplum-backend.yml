@@ -1,0 +1,110 @@
+# Local Medplum backend (no Medplum App)
+#
+# Why this exists:
+# - The official full-stack compose includes the Medplum App UI.
+# - For a custom product app, it’s less confusing to run only the backend.
+#
+# Bring it up:
+#   docker compose -f docker/medplum-backend.yml up -d
+#
+# Add admin UI:
+#   docker compose -f docker/medplum-backend.yml -f docker/medplum-admin.yml up -d
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=medplum
+      - POSTGRES_PASSWORD=medplum
+    volumes:
+      - medplum-postgres-data:/var/lib/postgresql/data
+    command:
+      - 'postgres'
+      - '-c'
+      - 'listen_addresses=*'
+      - '-c'
+      - 'statement_timeout=60000'
+      - '-c'
+      - 'default_transaction_isolation=REPEATABLE READ'
+      - '-c'
+      - 'shared_preload_libraries=pg_stat_statements,auto_explain'
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U medplum']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    command: redis-server --requirepass medplum
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', '-a', 'medplum', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  medplum-server:
+    image: medplum/medplum-server:latest
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - '8103:8103'
+
+    # Matches Medplum's upstream compose pattern (server config from env vars)
+    command: ['env']
+
+    environment:
+      MEDPLUM_PORT: 8103
+      MEDPLUM_BASE_URL: 'http://localhost:8103/'
+
+      # Set this to your product app dev server.
+      # If you're using Vite, it's often http://localhost:5173
+      MEDPLUM_APP_BASE_URL: 'http://localhost:5173/'
+
+      MEDPLUM_STORAGE_BASE_URL: 'http://localhost:8103/storage/'
+
+      MEDPLUM_DATABASE_HOST: 'postgres'
+      MEDPLUM_DATABASE_PORT: 5432
+      MEDPLUM_DATABASE_DBNAME: 'medplum'
+      MEDPLUM_DATABASE_USERNAME: 'medplum'
+      MEDPLUM_DATABASE_PASSWORD: 'medplum'
+
+      MEDPLUM_REDIS_HOST: 'redis'
+      MEDPLUM_REDIS_PORT: 6379
+      MEDPLUM_REDIS_PASSWORD: 'medplum'
+
+      MEDPLUM_BINARY_STORAGE: 'file:./binary/'
+
+      # Local-only convenience.
+      # Tighten this to your exact dev origins once your ports stabilize.
+      MEDPLUM_ALLOWED_ORIGINS: 'http://localhost:5173,http://localhost:3000,http://localhost:3005'
+
+      MEDPLUM_INTROSPECTION_ENABLED: 'true'
+      MEDPLUM_VM_CONTEXT_BOTS_ENABLED: 'true'
+      MEDPLUM_DEFAULT_BOT_RUNTIME_VERSION: 'vmcontext'
+      MEDPLUM_SHUTDOWN_TIMEOUT_MILLISECONDS: 30000
+
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          'fetch("http://localhost:8103/healthcheck").then(r => r.json()).then(console.log).catch(() => { process.exit(1); })',
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  medplum-postgres-data:

@@ -1,0 +1,19 @@
+# Optional Medplum App (stock UI) for local admin/debug
+#
+# Usage:
+#   docker compose -f docker/medplum-backend.yml -f docker/medplum-admin.yml up -d
+
+services:
+  medplum-app:
+    image: medplum/medplum-app:latest
+    restart: unless-stopped
+    depends_on:
+      medplum-server:
+        condition: service_healthy
+    ports:
+      - '3005:3000'  # avoid collision with chart-demo dev server (defaults to 3000)
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000']
+      interval: 10s
+      timeout: 5s
+      retries: 5
