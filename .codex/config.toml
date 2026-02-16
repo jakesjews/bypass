@@ -8,8 +8,3 @@ approval_policy = "on-request"
 # Allow writes inside the repo workspace.
 sandbox_mode = "workspace-write"
 
-# Reduce exposure to arbitrary live web content.
-web_search = "cached"
-
-# Optional: choose a default model.
-# model = "gpt-5.2"
