@@ -11,16 +11,6 @@ const bots = [
     dist: 'dist/bots/core/general-encounter-note.js',
     criteria: 'QuestionnaireResponse?questionnaire=$encounter-note',
   },
-  {
-    src: 'src/bots/core/obstetric-encounter-note.ts',
-    dist: 'dist/bots/core/obstetric-encounter-note.js',
-    criteria: 'QuestionnaireResponse?questionnaire=$obstetric-visit',
-  },
-  {
-    src: 'src/bots/core/gynecology-encounter-note.ts',
-    dist: 'dist/bots/core/gynecology-encounter-note.js',
-    criteria: 'QuestionnaireResponse?questionnaire=$gynecology-visit',
-  },
 ];
 
 async function main() {

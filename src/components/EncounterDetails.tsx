@@ -25,10 +25,6 @@ export function EncounterDetails(props: EncounterDetailsProps): JSX.Element {
   const tab = window.location.pathname.split('/').pop();
   const currentTab = tab && tabs.map((t) => t.toLowerCase()).includes(tab) ? tab : tabs[0].toLowerCase();
 
-  // Get the encounter type so the correct questionnaire can be retrieved
-  const encounterType = props.encounter.type?.[0].coding?.[0].code;
-  const GENERAL_ENCOUNTER_CODE = '1287706006';
-
   useEffect(() => {
     // Search for a response if there is one
     medplum
@@ -38,15 +34,14 @@ export function EncounterDetails(props: EncounterDetailsProps): JSX.Element {
       .then(setResponse)
       .catch(console.error);
 
-    // Get the questionnaire
+    // Use a single note interface for all encounters
     medplum
       .searchOne('Questionnaire', {
-        // If the code is for gynecology or obstetrics, use it, otherwise search for the default
-        context: encounterType ?? GENERAL_ENCOUNTER_CODE,
+        name: 'encounter-note',
       })
       .then(setQuestionnaire)
       .catch(console.error);
-  }, [response, questionnaire, encounterType, medplum, props.encounter]);
+  }, [response, questionnaire, medplum, props.encounter]);
 
   function handleTabChange(newTab: string | null): void {
     navigate(`/Encounter/${id}/${newTab ?? ''}`)?.catch(console.error);
