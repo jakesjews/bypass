@@ -6,7 +6,6 @@ import { Suspense } from 'react';
 import type { JSX } from 'react';
 import { Route, Routes } from 'react-router';
 import { EncounterPage } from './pages/EncounterPage';
-import { LandingPage } from './pages/LandingPage';
 import { SearchPage } from './pages/SearchPage';
 import { SignInPage } from './pages/SignInPage';
 
@@ -38,7 +37,7 @@ export function App(): JSX.Element | null {
       <ErrorBoundary>
         <Suspense fallback={<Loading />}>
           <Routes>
-            <Route path="/" element={profile ? <SearchPage /> : <LandingPage />} />
+            <Route path="/" element={profile ? <SearchPage /> : <SignInPage />} />
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/Encounter/:id">
               <Route index element={<EncounterPage />} />

@@ -27,6 +27,11 @@ Start:
 docker compose up -d
 ```
 
+Dev/test auth bootstrap is automatic:
+- seeded login: `bypass@bypass.com / bypass123`
+- registration disabled (`MEDPLUM_REGISTER_ENABLED=false`)
+- deterministic frontend OAuth client id pre-seeded in Docker config
+
 Smoke tests:
 
 - [ ] `GET http://localhost:8103/fhir/R4/metadata` returns a CapabilityStatement (FHIR server is up)
@@ -55,9 +60,21 @@ Whichever you choose, ensure `MEDPLUM_ALLOWED_ORIGINS` includes both dev origins
 ### Product app local dev
 
 - Set `MEDPLUM_BASE_URL=http://localhost:8103`
-- Set `MEDPLUM_CLIENT_ID=<local ClientApplication id>`
+- Set `MEDPLUM_CLIENT_ID=9f8f3f84-0fbe-4f8e-a7f4-7f6a26b7f8aa`
 - Run your React dev server (chart demo defaults to 3000)
-- Auth: Outseta embed → Medplum token exchange (see `docs/AUTH_OUTSETA_MEDPLUM.md`)
+- Sign in with `bypass@bypass.com / bypass123`
+- No signup route in dev/test UI and no local reCAPTCHA path
+
+### Fresh-start verification (recommended)
+
+```bash
+docker compose down -v
+docker compose up -d
+```
+
+Then verify:
+- [ ] `POST http://localhost:8103/auth/login` succeeds for `bypass@bypass.com / bypass123`
+- [ ] registration endpoints reject requests when disabled (`/auth/newuser`, `/auth/newproject`)
 
 ### Demo template reality check (Chart Demo is the baseline)
 
@@ -171,3 +188,5 @@ Avoid `allowedOrigins: '*'` except for short-lived local debugging.
 - Local docker: configured via environment variables in `docker-compose.yml`
 - Local non-docker: `medplum.config.json` (default)
 - AWS: loads config from AWS SSM Parameter Store using `/medplum/<env>/...` keys
+
+`bypass@bypass.com / bypass123` is a dev/test-only shortcut and must not be used in production or staging with real data.

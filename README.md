@@ -47,6 +47,17 @@ docker compose up -d
 
 - Medplum API: http://localhost:8103
 - Medplum admin UI: http://localhost:3005 (if you map it)
+- Seeded dev/test login: `bypass@bypass.com / bypass123`
+- Registration/signup path disabled in dev/test (no reCAPTCHA flow)
+- Frontend client id is deterministic (`MEDPLUM_CLIENT_ID=9f8f3f84-0fbe-4f8e-a7f4-7f6a26b7f8aa`)
+
+### Local login flow
+
+1. `docker compose up -d`
+2. `pnpm dev`
+3. Open the app and sign in with `bypass@bypass.com / bypass123`
+
+This policy is dev/test-only and must not be used in production/staging with real data.
 
 ## Where to start reading
 

@@ -25,6 +25,12 @@ We now keep **one** `docker-compose.yml` at repo root that runs the full local M
 
 This matches Medplum’s official “full-stack Docker” approach (`docker compose up -d`) and keeps local setup simple.
 
+The local Docker config also seeds frictionless auth for dev/test:
+- default super-admin email: `bypass@bypass.com`
+- default super-admin password: `bypass123`
+- registration endpoints disabled (`MEDPLUM_REGISTER_ENABLED=false`)
+- deterministic OAuth client seeded for the frontend
+
 Start:
 
 ```bash
@@ -35,6 +41,15 @@ Smoke tests:
 
 - [ ] `GET http://localhost:8103/fhir/R4/metadata` returns a CapabilityStatement
 - [ ] `GET http://localhost:8103/healthcheck` returns `{ ok: true, ... }`
+
+## 2) Frictionless login flow (no signup path)
+
+After startup:
+- open your app (`pnpm dev` default: `http://localhost:3000`)
+- go straight to sign-in
+- log in with `bypass@bypass.com / bypass123`
+
+There is no self-signup path in dev/test, so reCAPTCHA is out of flow.
 
 ### Port collision note (Medplum App vs chart-demo)
 
@@ -47,18 +62,6 @@ Pick one:
 - Keep Medplum App on 3000 and run chart-demo on another port
 
 Make sure CORS allows both origins.
-
-## 2) Create a Project + ClientApplication
-
-You need:
-- a Medplum **Project** to hold data
-- a **ClientApplication** for your web app to authenticate
-
-Easiest:
-- open the Medplum Admin App
-- create Project
-- create ClientApplication
-- copy ClientApplication `id` into your `.env` as `MEDPLUM_CLIENT_ID`
 
 ## 3) Run the starter app (`medplum-chart-demo`) against your backend
 
@@ -96,3 +99,8 @@ So if you use the CLI, set:
 ```bash
 export MEDPLUM_BASE_URL=http://localhost:8103
 ```
+
+## 6) Environment safety note
+
+`bypass@bypass.com / bypass123` is intentionally insecure and only for local/shared test environments.
+Do not use this policy in production or staging environments with real data.
