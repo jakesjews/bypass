@@ -72,3 +72,7 @@ At the end of each task, output:
 ### Deliverable requirements
 - Provide: summary of changes + list of files modified + exact commands to verify.
 - If any test/coverage work is deferred, create a TODO entry in BACKLOG with a clear acceptance test.
+
+### ExecPlans
+When writing complex features or significant refactors, use an ExecPlan (as described in .agent/PLANS.md) from design to implementation.
+
