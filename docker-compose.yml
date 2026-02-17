@@ -78,8 +78,8 @@ services:
 
       MEDPLUM_BINARY_STORAGE: 'file:./binary/'
 
-      # Local-only convenience. Tighten later.
-      MEDPLUM_ALLOWED_ORIGINS: 'http://localhost:3000,http://localhost:3005,http://localhost:5173'
+      # Dev/test-only convenience: allow all origins to avoid local port friction.
+      MEDPLUM_ALLOWED_ORIGINS: '*'
       MEDPLUM_DEFAULT_SUPER_ADMIN_EMAIL: 'bypass@bypass.com'
       MEDPLUM_DEFAULT_SUPER_ADMIN_PASSWORD: 'bypass123'
       MEDPLUM_REGISTER_ENABLED: 'false'

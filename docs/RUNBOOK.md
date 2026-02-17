@@ -55,7 +55,7 @@ You need **one** of these simple fixes:
 **Option B: keep Medplum App on 3000, run your product app on another port**
 - Configure Vite dev server port (e.g., 3001) for your product app
 
-Whichever you choose, ensure `MEDPLUM_ALLOWED_ORIGINS` includes both dev origins.
+In this repo's dev/test Docker setup, `MEDPLUM_ALLOWED_ORIGINS=*` is enabled to avoid local port friction.
 
 ### Product app local dev
 

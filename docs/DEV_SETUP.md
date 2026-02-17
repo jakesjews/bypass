@@ -61,7 +61,7 @@ Pick one:
 - Move Medplum App to 3005 (`3005:3000`) and keep chart-demo on 3000 (recommended), or
 - Keep Medplum App on 3000 and run chart-demo on another port
 
-Make sure CORS allows both origins.
+Dev/test Docker now sets `MEDPLUM_ALLOWED_ORIGINS=*` to avoid local port friction.
 
 ## 3) Run the starter app (`medplum-chart-demo`) against your backend
 
