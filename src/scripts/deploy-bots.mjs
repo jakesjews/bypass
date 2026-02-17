@@ -1,18 +1,11 @@
 // SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
 // SPDX-License-Identifier: Apache-2.0
 import { ContentType } from '@medplum/core';
-import type { Bundle, BundleEntry } from '@medplum/fhirtypes';
-import { randomUUID } from 'crypto';
-import fs from 'fs';
-import path from 'path';
+import { randomUUID } from 'node:crypto';
+import { readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
 
-interface BotDescription {
-  src: string;
-  dist: string;
-  criteria?: string;
-}
-
-const Bots: BotDescription[] = [
+const bots = [
   {
     src: 'src/bots/core/general-encounter-note.ts',
     dist: 'dist/bots/core/general-encounter-note.js',
@@ -30,15 +23,15 @@ const Bots: BotDescription[] = [
   },
 ];
 
-async function main(): Promise<void> {
-  const bundle: Bundle = {
+async function main() {
+  const bundle = {
     resourceType: 'Bundle',
     type: 'transaction',
-    entry: Bots.flatMap((botDescription): BundleEntry[] => {
+    entry: bots.flatMap((botDescription) => {
       const botName = path.parse(botDescription.src).name;
       const botUrlPlaceholder = `$bot-${botName}-reference`;
       const botIdPlaceholder = `$bot-${botName}-id`;
-      const results: BundleEntry[] = [];
+      const results = [];
       const { srcEntry, distEntry } = readBotFiles(botDescription);
       results.push(srcEntry, distEntry);
 
@@ -81,14 +74,14 @@ async function main(): Promise<void> {
     }),
   };
 
-  fs.writeFileSync('data/core/example-bots.json', JSON.stringify(bundle, null, 2));
+  writeFileSync('data/core/example-bots.json', JSON.stringify(bundle, null, 2));
 }
 
-function readBotFiles(description: BotDescription): Record<string, BundleEntry> {
-  const sourceFile = fs.readFileSync(description.src);
-  const distFile = fs.readFileSync(description.dist);
+function readBotFiles(description) {
+  const sourceFile = readFileSync(description.src);
+  const distFile = readFileSync(description.dist);
 
-  const srcEntry: BundleEntry = {
+  const srcEntry = {
     fullUrl: 'urn:uuid:' + randomUUID(),
     request: { method: 'POST', url: 'Binary' },
     resource: {
@@ -97,7 +90,7 @@ function readBotFiles(description: BotDescription): Record<string, BundleEntry> 
       data: sourceFile.toString('base64'),
     },
   };
-  const distEntry: BundleEntry = {
+  const distEntry = {
     fullUrl: 'urn:uuid:' + randomUUID(),
     request: { method: 'POST', url: 'Binary' },
     resource: {
@@ -110,4 +103,7 @@ function readBotFiles(description: BotDescription): Record<string, BundleEntry> 
   return { srcEntry, distEntry };
 }
 
-main().catch(console.error);
+main().catch((err) => {
+  console.error(err);
+  process.exitCode = 1;
+});

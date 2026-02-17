@@ -18,7 +18,7 @@ import type {
   Reference,
   Resource,
 } from '@medplum/fhirtypes';
-import { randomUUID } from 'crypto';
+import { randomUUID } from 'node:crypto';
 
 export interface BloodPressure {
   systolic?: Quantity;

@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react';
-import { copyFileSync, existsSync } from 'fs';
-import path from 'path';
+import { copyFileSync, existsSync } from 'node:fs';
+import path from 'node:path';
 import { defineConfig } from 'vite';
 
 if (!existsSync(path.join(__dirname, '.env'))) {

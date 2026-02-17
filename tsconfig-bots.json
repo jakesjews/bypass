@@ -2,9 +2,9 @@
   "compilerOptions": {
     "rootDir": "src/bots",
     "outDir": "dist",
-    "lib": ["esnext"],
-    "types": ["vitest/globals"],
-    "target": "es2018",
+    "lib": ["ES2024"],
+    "types": ["vitest/globals", "node"],
+    "target": "ES2022",
     "module": "commonjs",
     "moduleResolution": "node",
     "strict": true,
@@ -12,6 +12,7 @@
     "declaration": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "noImplicitOverride": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": false,
     "noImplicitAny": true,
@@ -24,10 +25,11 @@
     "inlineSources": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": true,
-    "allowJs": true,
+    "allowJs": false,
     "resolveJsonModule": true,
     "noEmit": true,
     "isolatedModules": true
   },
-  "include": ["src/bots/**/*.ts"]
+  "include": ["src/bots/**/*.ts"],
+  "exclude": ["src/bots/**/*.test.ts"]
 }

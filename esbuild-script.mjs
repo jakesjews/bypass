@@ -1,32 +1,27 @@
 // SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
 // SPDX-License-Identifier: Apache-2.0
-/* global process */
-/* global console */
-
-import botLayer from '@medplum/bot-layer/package.json' with { type: 'json' };
 import esbuild from 'esbuild';
-import fastGlob from 'fast-glob';
+import { globSync } from 'node:fs';
 
-// Find all TypeScript files in your source directory
-const entryPoints = fastGlob.sync('./src/**/*.ts').filter((file) => !file.endsWith('test.ts'));
-
-const botLayerDeps = Object.keys(botLayer.dependencies);
+// Build bot handlers only; app sources are bundled by Vite.
+const entryPoints = globSync('src/bots/**/*.ts', { exclude: ['**/*.test.ts'] }).sort();
 
 // Define the esbuild options
 const esbuildOptions = {
   entryPoints: entryPoints,
-  bundle: true, // Bundle imported functions
-  outdir: './dist', // Output directory for compiled files
-  platform: 'node', // or 'node', depending on your target platform
+  bundle: true,
+  outdir: './dist',
+  outbase: 'src',
+  platform: 'node',
   loader: {
-    '.ts': 'ts', // Load TypeScript files
+    '.ts': 'ts',
   },
   resolveExtensions: ['.ts'],
-  external: botLayerDeps,
-  format: 'cjs', // Set output format as ECMAScript modules
-  target: 'es2020', // Set the target ECMAScript version
-  tsconfig: 'tsconfig.json',
-  footer: { js: 'Object.assign(exports, module.exports);' }, // Required for VM Context Bots
+  external: ['@medplum/core', '@medplum/fhirtypes'],
+  format: 'cjs',
+  target: 'node25',
+  tsconfig: 'tsconfig-bots.json',
+  footer: { js: 'Object.assign(exports, module.exports);' }, // Required for VM Context Bots.
 };
 
 // Build using esbuild

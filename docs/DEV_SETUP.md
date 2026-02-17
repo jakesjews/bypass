@@ -76,8 +76,17 @@ See `docs/STARTER_APP.md` for the conversion checklist.
 
 ### Node version
 
-Medplum CLI docs currently require Node.js 20+. (If you use the Medplum CLI.)
+This repo is pinned to Node.js 25+ (`engines.node` in `package.json`).
 If your repo uses `volta` or `.nvmrc`, follow it.
+
+Useful checks:
+
+```bash
+pnpm typecheck
+pnpm lint
+pnpm test
+pnpm build
+```
 
 ### Medplum CLI base URL trap
 

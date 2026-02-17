@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2024",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["DOM", "DOM.Iterable", "ES2024"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "moduleDetection": "force",
+    "verbatimModuleSyntax": true,
+    "noImplicitOverride": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
@@ -16,5 +19,5 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
-  "exclude": ["dist"]
+  "exclude": ["dist", "src/bots"]
 }

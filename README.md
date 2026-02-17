@@ -54,3 +54,19 @@ docker compose up -d
 - `docs/STARTER_APP.md`
 - `docs/RUNBOOK.md`
 - `docs/BACKLOG.md`
+
+## Toolchain
+
+- Node.js: `>=25.0.0`
+- Package manager: `pnpm` (see `packageManager` in `package.json`)
+
+## Common Commands
+
+```bash
+pnpm install
+pnpm typecheck
+pnpm lint
+pnpm test
+pnpm build
+pnpm dev
+```
