@@ -1,0 +1,1 @@
+- 2026-02-17 17:44 EST — Local “Doctor Note Intake” flow implemented (not yet committed): paste synthetic note → create encounter context + QuestionnaireResponse; added pipeline payload utils + tests; local checks pass (format/lint/typecheck/test/build). Next: commit + convert bot output to MedicationRequest/ServiceRequest drafts + minimal review panel.
