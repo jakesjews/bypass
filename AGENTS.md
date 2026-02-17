@@ -41,3 +41,34 @@ At the end of each task, output:
 - Commands to run
 - Any follow-ups (docs, ADRs, fixtures)
 
+## Code Quality and Testing (non-negotiable)
+
+### Clean, maintainable code
+- Prefer small, composable modules with clear boundaries.
+- Avoid cleverness: readable > clever.
+- Keep functions short; prefer pure functions; isolate side effects (network, storage).
+- No `any` in TypeScript unless absolutely necessary; if used, add a comment explaining why and a follow-up task.
+- Avoid "grab bag" utilities; create domain-focused modules (e.g., draftOrders/, medplum/, outseta/).
+- Don’t disable lint rules unless you also explain why.
+
+### Tests: full automated coverage for new/changed behavior
+- Every new feature must include automated tests that validate the behavior from the user’s perspective.
+- Every bug fix must include a regression test that fails before the fix and passes after.
+- New files should be ~100% covered by tests unless explicitly justified.
+- For existing files: do not decrease coverage; prefer “ratchet” (increase coverage in touched areas).
+- If a change is hard to test, refactor to make it testable (dependency injection, pure logic extraction), then test it.
+
+### What to run (always)
+- Detect the repo’s scripts in package.json and run the closest equivalents of:
+  - lint
+  - typecheck
+  - test (with coverage if configured)
+- If tests don’t exist yet for the modified area, add the minimal test harness (prefer Vitest for Vite/React) and at least one meaningful test.
+
+### Test style (front-end)
+- Prefer React Testing Library style tests: test user-visible behavior, not internal implementation.
+- Avoid snapshot tests unless they represent stable, intentional UI output.
+
+### Deliverable requirements
+- Provide: summary of changes + list of files modified + exact commands to verify.
+- If any test/coverage work is deferred, create a TODO entry in BACKLOG with a clear acceptance test.
