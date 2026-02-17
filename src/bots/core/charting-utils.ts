@@ -42,7 +42,7 @@ export function createObservations(
   encounter: Encounter,
   user: Practitioner,
   response: QuestionnaireResponse,
-  date: string
+  date: string,
 ): Observation[] {
   const observations: Observation[] = [];
   const bloodPressure: BloodPressure = {
@@ -107,7 +107,7 @@ export function createBloodPressureObservation(
   encounter: Encounter,
   user: Practitioner,
   date: string,
-  response: QuestionnaireResponse
+  response: QuestionnaireResponse,
 ): Observation | undefined {
   const { systolic, diastolic } = bloodPressure;
   if (!systolic && !diastolic) {
@@ -177,7 +177,7 @@ export function createConditions(
   partialCondition: Partial<Condition>,
   encounter: Encounter,
   user: Practitioner,
-  problemList: boolean
+  problemList: boolean,
 ): Condition[] {
   const conditions: Condition[] = [];
 
@@ -242,7 +242,7 @@ export function createConditions(
 export function createClinicalImpression(
   encounter: Encounter,
   user: Practitioner,
-  note?: string
+  note?: string,
 ): ClinicalImpression | undefined {
   if (!note) {
     return undefined;

@@ -58,7 +58,7 @@ function getHeightInMeters(height: Quantity): number {
       return heightVal;
     default:
       throw new Error(
-        'Unknown unit. Please provide height in one of the following units: Inches, feet, centimeters, or meters.'
+        'Unknown unit. Please provide height in one of the following units: Inches, feet, centimeters, or meters.',
       );
   }
 }

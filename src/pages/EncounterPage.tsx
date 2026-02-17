@@ -14,7 +14,7 @@ export function EncounterPage(): JSX.Element {
   const medplum = useMedplum();
   const { id } = useParams();
   const [encounter, setEncounter] = useState<Encounter>(
-    useResource<Encounter>({ reference: `Encounter/${id}` }) as Encounter
+    useResource<Encounter>({ reference: `Encounter/${id}` }) as Encounter,
   );
 
   const patientReference = encounter?.subject as Reference<Patient>;

@@ -57,13 +57,13 @@ describe('Bot utility function tests', async () => {
 
   test('BMI with unknown height unit', async () => {
     expect(() => calculateBMI({ value: 180, unit: 'cms' }, { value: 50, unit: 'kg' })).toThrow(
-      /^Unknown unit. Please provide height in one of the following units: Inches, feet, centimeters, or meters.$/
+      /^Unknown unit. Please provide height in one of the following units: Inches, feet, centimeters, or meters.$/,
     );
   });
 
   test('BMI with unknown weight unit', async () => {
     expect(() => calculateBMI({ value: 180, unit: 'cm' }, { value: 50, unit: 'kgs' })).toThrow(
-      /^Unknown unit. Please provide weight in one of the following units: Pounds or kilograms.$/
+      /^Unknown unit. Please provide weight in one of the following units: Pounds or kilograms.$/,
     );
   });
 
@@ -97,7 +97,7 @@ describe('Bot utility function tests', async () => {
     });
 
     expect(() => createObservations(noCode, codes, encounter, practitioner, response, date)).toThrow(
-      /^No code provided$/
+      /^No code provided$/,
     );
   });
 });

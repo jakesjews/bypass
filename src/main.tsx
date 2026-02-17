@@ -49,5 +49,5 @@ root.render(
         </MantineProvider>
       </MedplumProvider>
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );

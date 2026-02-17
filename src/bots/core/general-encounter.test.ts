@@ -83,7 +83,7 @@ describe('General Encounter Note', async () => {
     noReasonForVisit.encounter = { reference: encounterRef };
 
     await expect(handler(medplum, { bot, contentType, input: noReasonForVisit, secrets: {} })).rejects.toThrow(
-      /^Must provide a reason for the visit$/
+      /^Must provide a reason for the visit$/,
     );
   });
 
